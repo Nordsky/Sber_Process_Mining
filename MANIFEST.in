@@ -1,5 +1,6 @@
 include .gitignore
 include LICENSE
+include LICENSE_RUS
 include requirements.txt
 global-exclude *~
 global-exclude *.pyc
