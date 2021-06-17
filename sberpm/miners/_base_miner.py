@@ -51,7 +51,7 @@ class BaseMiner(AbstractMiner):
         causal_pairs, _ = super()._get_causal_parallel_pairs(follows_pairs)
 
         graph = create_dfg()
-        super().create_transitions(graph, unique_activities)
+        super().create_act_nodes(graph, unique_activities)
         super().create_start_end_events_and_edges(graph, *super()._get_first_last_activities())
         self.create_edges(graph, causal_pairs)
         self.graph = graph
