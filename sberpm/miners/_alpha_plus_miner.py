@@ -74,7 +74,7 @@ class AlphaPlusMiner(AlphaMiner):
 
         # Create and fill the graph
         graph = create_petri_net()
-        super().create_transitions(graph, unique_activities)  # all transitions (including l1a)
+        super().create_act_nodes(graph, unique_activities)  # all transitions (including l1a)
         super().create_start_end_events_and_edges(graph, *self._get_first_last_activities_without(loop_1_activities))
         super().create_places_and_edges(graph, places)
 

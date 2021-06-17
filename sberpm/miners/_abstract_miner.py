@@ -146,7 +146,7 @@ class AbstractMiner:
         # ----------------------------------------------------------------------------------
 
     @staticmethod
-    def create_transitions(graph, activities):
+    def create_act_nodes(graph, activities):
         """
         Creates nodes for given activities.
 
