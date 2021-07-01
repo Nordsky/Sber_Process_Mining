@@ -33,6 +33,7 @@ setuptools.setup(
               'sberpm.metrics',
               'sberpm.miners',
               'sberpm.ml', 'sberpm.ml.processes', 'sberpm.ml.vectorizer',
+              'sberpm.ml.reinforcement_learning',
               'sberpm.visual'
               ],
     classifiers=[
