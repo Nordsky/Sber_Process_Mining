@@ -11,6 +11,7 @@ from ..visual._graph import create_dfg
 
 import pandas as pd
 import numpy as np
+from copy import copy
 
 from .._holder import DataHolder
 from typing import Tuple
@@ -161,14 +162,17 @@ class HeuMiner(AbstractMiner):
         pairs = set(zip(df_pairs['a'], df_pairs['b']))
         for a, b in pairs:
             graph.add_edge(a, b)
+        added_edges = copy(pairs)
 
         # length-two loops
         df_triples = self.df_triples[self.df_triples['coeff'] >= self.threshold][['a', 'b']]
         triples = set(zip(df_triples['a'], df_triples['b']))
         for a, b in triples:
-            if (a, b) not in pairs and (b, a) not in pairs:
+            if (a, b) not in added_edges and (b, a) not in added_edges:
                 graph.add_edge(a, b)
                 graph.add_edge(b, a)
+                added_edges.add((a, b))
+                added_edges.add((b, a))
 
 
 def get_reversed_values(df: pd.DataFrame, v1_col: str, v2_col: str) -> pd.DataFrame:
