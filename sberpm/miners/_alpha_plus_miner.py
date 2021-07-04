@@ -246,20 +246,22 @@ class AlphaPlusMiner(AlphaMiner):
         places: list of tuple of two sets of str
             List of places. A place is represented by two sets of activities (incoming and outgoing).
         """
+        separator = ','
+
         for l1act in incoming_l1a.keys():
             if l1act in outgoing_l1a:
                 inc_activities = incoming_l1a[l1act]
                 out_activities = outgoing_l1a[l1act]
                 inc_without_out = inc_activities - out_activities
                 out_without_inc = out_activities - inc_activities
-                possible_place_id = ','.join(inc_without_out) + ' -> ' + ','.join(out_without_inc)
+                possible_place_id = f'{separator.join(inc_without_out)} -> {separator.join(out_without_inc)}'
                 place_id = None
                 if possible_place_id in graph.nodes:
                     place_id = possible_place_id
                 else:
                     for place in places:
                         if inc_without_out.issubset(place[0]) and out_without_inc.issubset(place[1]):
-                            place_id = ','.join(place[0]) + ' -> ' + ','.join(place[1])
+                            place_id = f'{separator.join(place[0])} -> {separator.join(place[1])}'
                             break
                 if place_id is not None:
                     graph.add_edge(l1act, place_id)

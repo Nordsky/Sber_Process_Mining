@@ -49,4 +49,4 @@ def bpmn_to_graph(bpmn_graph):
 
 
 def add_last_space(s):
-    return s + ' '
+    return f'{s} '

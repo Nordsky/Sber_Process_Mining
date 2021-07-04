@@ -28,7 +28,7 @@ class Node:
         self.metrics = {}
 
     def __repr__(self):
-        return "Node: " + self.id
+        return f'Node: {self.id}'
 
     def add_input_edge(self, edge):
         """
@@ -80,7 +80,7 @@ class Edge:
     """
 
     def __init__(self, source_node: Node, target_node: Node):
-        self.id = source_node.id + '_' + target_node.id
+        self.id = f'{source_node.id}_{target_node.id}'
         self.source_node = source_node
         self.target_node = target_node
         self.label = None
@@ -92,7 +92,7 @@ class Edge:
         self.metrics = {}
 
     def __repr__(self):
-        return "Edge: " + self.id
+        return f'Edge: {self.id}'
 
     def add_metric(self, metric_name, metric_value):
         """
