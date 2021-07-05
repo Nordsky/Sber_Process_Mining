@@ -1,8 +1,8 @@
-#Краткое описание основных классов и модулей библиотеки SberProcessMining (SberPM)
+# Краткое описание основных классов и модулей библиотеки SberProcessMining (SberPM)
 
 
-#sberpm
-##sberpm\_holder.py
+# sberpm
+## sberpm\_holder.py
 
 
     class DataHolder
@@ -39,15 +39,15 @@
     Рассчитывает продолжительность, если она не рассчитана.
 
 
-##sberpm\_utils.py
+## sberpm\_utils.py
 - Функции:
 
   `def generate_data_partitions(df, id_column, batch_num):`
     Работа с индексами для трассировок событий.
 
 
-##sberpm\autoinsights
-###sberpm\autoinsights\_auto_insights.py
+## sberpm\autoinsights
+### sberpm\autoinsights\_auto_insights.py
 
 
     class AutoInsights
@@ -74,8 +74,8 @@
     Добавляет два информационных узла к графику.
 
 
-##sberpm\bpmn
-###sberpm\bpmn\_bpmn_file_to_graph.py
+## sberpm\bpmn
+### sberpm\bpmn\_bpmn_file_to_graph.py
 
 
     class LocalObject
@@ -179,8 +179,8 @@
     Изменяет строку (id, name,...), поскольку graphviz может неправильно работать с определенными символами.
 
 
-###sberpm\bpmn\_bpmn_graph_to_file
-####sberpm\bpmn\_bpmn_graph_to_file\_bpmn_exporter.py
+### sberpm\bpmn\_bpmn_graph_to_file
+#### sberpm\bpmn\_bpmn_graph_to_file\_bpmn_exporter.py
 
 
     class BpmnExporter
@@ -198,14 +198,14 @@
     Возвращает строковое представление записи BPMN вычисленного графика BPMN.
 
 
-####sberpm\bpmn\_bpmn_graph_to_file\_bpmn_to_dot.py
+#### sberpm\bpmn\_bpmn_graph_to_file\_bpmn_to_dot.py
 - Функции:
   
   `def bpmn_to_graph(bpmn_graph):`
     Преобразует данный график bpmn в объект графика, который можно визуализировать.
   
   
-####sberpm\bpmn\_bpmn_graph_to_file\_bpmn_xml_maker.py
+#### sberpm\bpmn\_bpmn_graph_to_file\_bpmn_xml_maker.py
 Получает график graphviz с координатами и записывает его в формат xml (.bpmn)
 Вызовет исключение, если данные не содержат координат
 
