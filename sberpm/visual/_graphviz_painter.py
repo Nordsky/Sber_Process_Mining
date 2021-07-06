@@ -347,7 +347,7 @@ class GraphvizPainter:
             Modified node's label.
         """
         for metric_name, metric_value in metrics.items():
-            label += '\\n' + metric_name + ': ' + str(round(metric_value, 3))
+            label += f'\\n{metric_name}: {str(round(metric_value, 3))}'
         return label
 
     @staticmethod
@@ -470,7 +470,7 @@ def _get_hex_color(int_color):
     left_b = _get_hex_string(int(int_color) // 16)
     right_b = _get_hex_string(int(int_color) % 16)
 
-    res = "#" + left_r + right_r + left_g + right_g + left_b + right_b
+    res = f'#{left_r}{right_r}{left_g}{right_g}{left_b}{right_b}'
     return res
 
 

@@ -36,7 +36,7 @@ class BPMNObject:
     """
 
     def __init__(self, obj_type: str, obj_number: int):
-        self.id = obj_type + '_' + str(obj_number)
+        self.id = f'{obj_type}_{str(obj_number)}'
 
     def get_id(self) -> str:
         return self.id
@@ -390,15 +390,12 @@ class XMLMaker:
         Set the beginning of the xml-file
         """
         root = eTree.Element('bpmn:definitions')
-        # root.set("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
         root.set("xmlns:bpmn", "http://www.omg.org/spec/BPMN/20100524/MODEL")
         root.set("xmlns:bpmndi", "http://www.omg.org/spec/BPMN/20100524/DI")
         root.set("xmlns:dc", "http://www.omg.org/spec/DD/20100524/DC")
         root.set("xmlns:di", "http://www.omg.org/spec/DD/20100524/DI")
         root.set("id", "Definitions_123")
         root.set("targetNamespace", "http://bpmn.io/schema/bpmn")
-        # root.set("expressionLanguage", "http://www.w3.org/1999/XPath")
-        # root.set("xmlns:xsd", "http://www.w3.org/2001/XMLSchema")
         return root
 
     def _add_objects_and_connections(self, bpmn: BPMN):
@@ -416,7 +413,7 @@ class XMLMaker:
             self.prefix = 'bpmn'
 
         def pref(self, s: str) -> str:
-            return self.prefix + ':' + s
+            return f'{self.prefix}:{s}'
 
         @staticmethod
         def get_process_id():
@@ -433,7 +430,6 @@ class XMLMaker:
         def build(self, bpmn: BPMN, parent: eTree.SubElement):
             process = eTree.SubElement(parent, self.pref('process'))
             process.set("id", self.get_process_id())
-            # process.set("isExecutable", "false")
 
             for bpmn_object in bpmn.get_bpmn_objects():
                 if isinstance(bpmn_object, StartEvent):
@@ -472,23 +468,23 @@ class XMLMaker:
             self.edge_prefix = 'di'
 
         def pref(self, s: str) -> str:
-            return self.prefix + ':' + s
+            return f'{self.prefix}:{s}'
 
         def s_pref(self, s: str) -> str:
             """
             Return the prefix for subelements of Shape
             """
-            return self.shape_prefix + ':' + s
+            return f'{self.shape_prefix}:{s}'
 
         def e_pref(self, s: str) -> str:
             """
             Return the prefix for subelements of Edge
             """
-            return self.edge_prefix + ':' + s
+            return f'{self.edge_prefix}:{s}'
 
         @staticmethod
         def modify_id(s: str) -> str:
-            return s + '_element'
+            return f'{s}_element'
 
         def build(self, bpmn: BPMN, parent: eTree.SubElement):
             diagram = eTree.SubElement(parent, self.pref('BPMNDiagram'))
@@ -516,13 +512,7 @@ class XMLMaker:
                     waypoint.set("x", str(round(x, 3)))
                     waypoint.set("y", str(round(y, 3)))
 
-    def write(self, path, pretty_print: bool = True):
-        # root = copy(self._root)
-        # if pretty_print:
-        #     root = self._pretty_print(root)  # pretty print of xml
-        #
-        # tree = eTree.ElementTree(root)
-        # tree.write(path, encoding='utf-8', xml_declaration=True)
+    def write(self, path):
         with open(path, mode='w', encoding='utf-8') as f:
             f.write(self.to_string())
 

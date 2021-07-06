@@ -3,6 +3,7 @@
 #   Link: https://github.com/pandas-dev/pandas
 
 import pandas as pd
+import re
 from ._utils import round_decorator
 
 
@@ -40,16 +41,10 @@ class BaseMetric:
     def __init__(self, data_holder, time_unit, round):
         data_holder.check_or_calc_duration()
         self._dh = data_holder
-        if time_unit in ('week', 'w'):
-            self._time_unit = 604800
-        elif time_unit in ('day', 'd'):
-            self._time_unit = 86400
-        elif time_unit in ('hour', 'h'):
-            self._time_unit = 3600
-        elif time_unit in ('minute', 'm'):
-            self._time_unit = 60
-        elif time_unit in ('second', 's'):
-            self._time_unit = 1
+        times = {'week': 604800, 'day': 86400, 'hour': 3600, 'minute': 60, 'second': 1}
+        result = [times[time] for time in times if re.match(f'{time_unit}+', time)]
+        if result:
+            self._time_unit = result[0]
         else:
             raise ValueError(f'Unknown time unit: "{time_unit}"')
 

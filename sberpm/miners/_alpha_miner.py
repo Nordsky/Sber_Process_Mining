@@ -399,8 +399,9 @@ class AlphaMiner(AbstractMiner):
         for pair in places:
             set1 = pair[0]
             set2 = pair[1]
+            separator = ','
 
-            place_id = ','.join(set1) + ' -> ' + ','.join(set2)
+            place_id = f'{separator.join(set1)} -> {separator.join(set2)}'
             graph.add_node(place_id, '', node_type=NodeType.PLACE)
 
             for in_node_id in set1:
